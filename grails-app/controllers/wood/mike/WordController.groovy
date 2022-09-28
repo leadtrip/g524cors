@@ -5,7 +5,7 @@ import grails.converters.JSON
 class WordController {
 
     def index() {
-        render 'soup'
+        render 'Hello index'
     }
 
     /**
@@ -15,6 +15,11 @@ class WordController {
         log.info("googleOnly accessed")
         //header( "Access-Control-Allow-Origin", "https://www.google.com" )  // we'd do this if we were doing this manually without grails cors enabled
         render 'Hello Google'
+    }
+
+    def stackoverflowOnly() {
+        log.info("stackoverflowOnly accessed")
+        render 'Hello stackoverflow'
     }
 
     /**

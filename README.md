@@ -4,4 +4,4 @@ Various issues when grails.cors.enabled in either application.yml or application
 
 Trying to implement manually without grails.cors.enabled works with simple requests but
 complex requests don't work as the pre-flight OPTIONS request doesn't make it to the app
-either in the interceptor or the controller action.
+either in the interceptor or the controller action, see - https://github.com/grails/grails-core/issues/12541
