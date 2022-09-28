@@ -10,6 +10,17 @@ grails:
             # Whether to translate GORM events into Reactor events
             # Disabled by default for performance reasons
             events: false
+    cors:
+        enabled: true
+        allowedHeaders:
+            - Content-Type
+        mappings:
+            '[/word/googleOnly]':
+                allowedOrigins: https://www.google.com
+#                allowedOrigins:                // the docs state this is how to specify a list of allowedOrigins but it doesn't seem to work
+#                    - https://www.google.com   // debug class GrailsCorsConfiguration line 50 where the config keys are like allowedOrigins[0] rather than just allowedOrigins
+            '[/word/anywhere]':
+                allowedOrigins: '*'
 info:
     app:
         name: '@info.app.name@'

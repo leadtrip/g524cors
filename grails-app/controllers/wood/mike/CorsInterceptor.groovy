@@ -8,9 +8,12 @@ class CorsInterceptor {
     }
 
     boolean before() {
-        log.info('CorsInterceptor fired')
-        if ("OPTIONS" == request.method) {
-            log.info('options request recieved')
+        logRequest()
+
+        header( "Access-Control-Allow-Origin", "*" )
+        boolean options = ("OPTIONS" == request.method)
+        if (options) {
+            log.info("Adding OPTIONS headers")
             header( "Access-Control-Allow-Origin", "*" )
             header( "Access-Control-Allow-Credentials", "true" )
             header( "Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
@@ -18,7 +21,15 @@ class CorsInterceptor {
 
             response.status = 200
         }
+
         true
+    }
+
+    def logRequest() {
+        log.info("****************************** ${request.method} - ${request.getHeader('referer')} ******************************")
+        request.getHeaderNames().each {
+            log.info("$it - ${request.getHeader(it)}")
+        }
     }
 
     boolean after() { true }

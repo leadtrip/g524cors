@@ -1,5 +1,7 @@
 package wood.mike
 
+import grails.converters.JSON
+
 class WordController {
 
     def index() {
@@ -10,8 +12,8 @@ class WordController {
      * Fine to access from same same domain and google.com with a simple request
      */
     def googleOnly() {
-        log.info("bbcOnly accessed")
-        header( "Access-Control-Allow-Origin", "https://www.google.com" )
+        log.info("googleOnly accessed")
+        //header( "Access-Control-Allow-Origin", "https://www.google.com" )  // we'd do this if we were doing this manually without grails cors enabled
         render 'Hello Google'
     }
 
@@ -20,7 +22,10 @@ class WordController {
      */
     def anywhere() {
         log.info("anywhere accessed")
-        header( "Access-Control-Allow-Origin", "*" )
-        render 'Hello anywhere'
+        // header( "Access-Control-Allow-Origin", "*" )     // we'd do this if we were doing this manually without grails cors enabled
+        if ( request.method == 'POST' )
+            render (['Hello anywhere'] as JSON )
+        else
+            render 'Hello anywhere'
     }
 }
