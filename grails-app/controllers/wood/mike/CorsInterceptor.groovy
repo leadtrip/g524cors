@@ -1,6 +1,9 @@
 package wood.mike
 
-
+/**
+ * This was put in place when trying to implement CORS functionality without grails.cors.enabled in config.
+ * It works for simple requests but complex request pre-flight OPTIONS requests don't arrive here.
+ */
 class CorsInterceptor {
 
     CorsInterceptor() {
